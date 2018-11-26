@@ -1,0 +1,39 @@
+sudo apt install python2.7-dev python3.6-dev python3-pip python-pip build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev -y &&
+sudo pip2 install --upgrade pip && sudo pip2 install numpy matplotlib &&
+sudo pip3 install --upgrade pip && sudo pip3 install numpy matplotlib &&
+cd ~/Downloads &&
+git clone https://github.com/opencv/opencv opencv &&
+cd opencv &&
+git clone https://github.com/opencv/opencv_contrib extras &&
+mkdir build && cd build &&
+cmake .. 										\
+-DWITH_QT=1 										\
+-DQt5Widgets_DIR:PATH="[QT_DIR]/[QT_VERSION]/gcc_64/lib/cmake/Qt5Widgets" 		\
+-DQt5Core_DIR:PATH="[QT_DIR]/[QT_VERSION]/gcc_64/lib/cmake/Qt5Core" 			\
+-DQt5OpenGL_DIR:PATH="[QT_DIR]/[QT_VERSION]/gcc_64/lib/cmake/Qt5OpenGL" 		\
+-DQt5Gui_DIR:PATH="[QT_DIR]/[QT_VERSION]/gcc_64/lib/cmake/Qt5Gui" 			\
+-DQt5Concurrent_DIR:PATH="[QT_DIR]/[QT_VERSION]/gcc_64/lib/cmake/Qt5Concurrent" 	\
+-DQt5Test_DIR:PATH="[QT_DIR]/[QT_VERSION]/gcc_64/lib/cmake/Qt5Test" 			\
+-DOPENCV_EXTRA_MODULES_PATH:PATH="../extras/modules" 					\
+-DINSTALL_PYTHON_EXAMPLES=1 								\
+-DCMAKE_BUILD_TYPE:STRING="Release" 							\
+-DWITH_OPENGL=1 &&
+make -j8 &&
+sudo make install
+
+## MEU APÊNDICE
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D INSTALL_C_EXAMPLES=OFF \
+-D OPENCV_EXTRA_MODULES_PATH=/.virtualenvs/cv/bin/python \
+-D BUILD_EXAMPLES=ON \
+-DENABLE_PRECOMPILED_HEADERS=OFF ..\
+
+## APÊNDICE 2
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D INSTALL_PYTHON_EXAMPLES=ON \
+-D OPENCV_EXTRA_MODULES_PATH=~/opencv/opencv_contrib/modules -D BUILD_opencv_dnns_easily_fooled=OFF \
+-D BUILD_opencv_dnn_modern=OFF -D BUILD_opencv_cnn_3dobj=OFF \
+-D PYTHON_EXECUTABLE=/usr/bin/python \
+ -D WITH_CUDA=OFF -D BUILD_SHARED_LIBS=OFF \
+ -D BUILD_EXAMPLES=ON  ..\
