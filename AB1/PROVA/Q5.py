@@ -1,0 +1,17 @@
+a = float(input('Digite um numero: '))
+b = float(input('Digite outro numero: '))
+print('Menu:')
+print('1. Soma')
+print('2. Subtração')
+print('3. Multiplicação')
+print('4. Quociente da divisão')
+print('5. Resto da divisão')
+opcao = int(input('Digite aqui a opcao (1 a 5):'))
+if opcao == 1: print('a+b=', a+b)
+elif opcao == 2: print('a-b=', a-b)
+elif opcao == 3: print('a*b=', a*b)
+elif opcao == 4 and a > 0 and b > 0: print('a//b=', a//b)
+elif opcao == 5 and a > 0 and b > 0: print('a%b=', a%b)
+else:
+    print('Opcao invalida.')
+
