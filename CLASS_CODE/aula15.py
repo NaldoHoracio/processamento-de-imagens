@@ -4,7 +4,7 @@ Created on Tue Mar 19 09:50:23 2019
 
 @author: horacio
 """
-
+import os
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,8 +15,8 @@ noisy_o = cv2.morphologyEx(noisy, cv2.MORPH_OPEN, kernel)
 noisy_oc = cv2.morphologyEx(noisy_o, cv2.MORPH_CLOSE, kernel)
 
 plt.subplot(131), plt.imshow(noisy, cmap='gray'), plt.title('Original')
-plt.subplot(132), plt.imshow(noisy_o, cmap='gray'), plt.title('Original')
-plt.subplot(133), plt.imshow(noisy_oc, cmap='gray'), plt.title('Original')
+plt.subplot(132), plt.imshow(noisy_o, cmap='gray'), plt.title('Noisy_o')
+plt.subplot(133), plt.imshow(noisy_oc, cmap='gray'), plt.title('Noisy_oc')
 plt.show();
 
 #%%
@@ -59,7 +59,7 @@ c = cv2.morphologyEx(a, cv2.MORPH_DILATE, b)
 d = c & ~a
 
 plt.subplot(131), plt.imshow(a, cmap='gray'), plt.title('A')
-plt.subplot(132), plt.imshow(c, cmap = 'gray'), plt.title('SC = A \ominus B$')
+plt.subplot(132), plt.imshow(c, cmap = 'gray'), plt.title('$C = A \ominus B$')
 plt.subplot(133), plt.imshow(d, cmap = 'gray'), plt.title('$D = A - (A \ominus B)$')
 plt.show()
 
@@ -84,7 +84,7 @@ plt.subplot(231), plt.imshow(img, cmap='gray'), plt.title('A')
 plt.subplot(232), plt.imshow(~img, cmap = 'gray'), plt.title('$A^C$')
 plt.subplot(233), plt.imshow(result, cmap = 'gray'), plt.title('$R = (X_{k-1} \oplus B)$')
 plt.subplot(234), plt.imshow(result_inv, cmap='gray'), plt.title('$R^C$')
-plt.subplot(235), plt.imshow(output, cmap = 'gray')
+plt.subplot(235), plt.imshow(output, cmap = 'gray'), plt.title('Mask')
 plt.show()
 
 
