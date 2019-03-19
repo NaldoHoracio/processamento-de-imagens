@@ -54,3 +54,55 @@ plt.subplot('223'); plt.title('R'); plt.imshow(cv2.applyColorMap[2], colormap)
 plt.subplot('224'); plt.title('Original'); plt.imshow(cv2.cvtColorMap,(img, cv2.COLOR_BGR2RGB))
 plt.show()
 
+#%%
+
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+
+# Load a color image and visualize each channel separetely
+img = cv2.imread('/home/horacio/Imagens/baboon.png', cv2.IMREAD_COLOR)
+bgr = cv2.split(img)
+# colormap = cv2.COLORMAT_JET
+colormap = 1
+
+plt.subplot('221'); plt.title('B'); plt.imshow(cv2.applyColorMap(bgr[0]), colormap)
+plt.subplot('222'); plt.title('G'); plt.imshow(cv2.applyColorMap(bgr[1]), colormap)
+plt.subplot('223'); plt.title('R'); plt.imshow(cv2.applyColorMap(bgr[2]), colormap)
+plt.subplot('224'); plt.title('Original'); plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
+plt.show()
+
+#%%
+# Load a color image and visualize each channel separetely
+img = cv2.imread('/home/horacio/Imagens/baboon.png', cv2.IMREAD_COLOR)
+img = 255 - img
+bgr = cv2.split(img)
+colormap = cv2.COLORMAP_JET
+
+plt.subplot('221'); plt.title('B'); plt.imshow(cv2.applyColorMap(bgr[0]), colormap)
+plt.subplot('222'); plt.title('G'); plt.imshow(cv2.applyColorMap(bgr[1]), colormap)
+plt.subplot('223'); plt.title('R'); plt.imshow(cv2.applyColorMap(bgr[2]), colormap)
+plt.subplot('224'); plt.title('Original'); plt.imshow(cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
+plt.show()
+
+#%% Creating BGR color disks
+rows = 1e3
+radius = rows/4
+bx = rows/2
+by = rows/2 - radius/2
+gx = rows/2 - radius/2
+gy = rows/2 + radius/2
+rx = rows/2 + radius/2
+ry = rows/2 + radius/2
+#
+bgr = [createWhiteDisk(int(rows), int(rows), int(bx), int(by), int(radius)),
+       createWhiteDisk(int(rows), int(rows), int(gx), int(gy), int(radius)),
+        createWhiteDisk(int(rows), int(rows), int(rx), int(ry), int(radius))]
+
+cv2.namedWindow('img', cv2.WINDOW_KEEPRATIO)
+while 0xFF & cv2.waitKey(1) != ord('q'):
+    img = cv2.merge(bgr)
+    img = scaleImag2_uchar(img)
+    cv2.imshow('img', img)
+cv2.destroyAllWindows()
+
