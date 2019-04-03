@@ -13,7 +13,7 @@ from keras.layers.normalization import BatchNormalization
 RGB = 3
 GRAY = 1
 
-class ConvNetwork:
+class KeratoNet:
 
     def buildNet(height, width, channels, classes):
         # Declaramos a nossa rede seguindo um modelo sequencial.
