@@ -7,8 +7,8 @@ from keras.layers.core import Flatten
 from keras.layers.core import Dense
 from keras.layers.core import Activation
 from keras.layers.core import Dropout
-from keras.layers import Conv2D
-from keras.layers import MaxPooling2D
+from keras.layers.convolution import Conv2D
+from keras.layers.convolution import MaxPooling2D
 from keras.layers.normalization import BatchNormalization
 RGB = 3
 GRAY = 1
@@ -25,17 +25,17 @@ class ConvNetwork:
         # de 16, para 32, e em seguida 64.
         # Utilizaremos um kernel de tamanho 3x3.
         model.add(Conv2D(filters = 16, kernel_size = (3,3), input_shape = (height, width, channels)))
-        model.add(BatchNormalization(axis = -1))
+        model.add(BatchNormalization())
         model.add(Activation('relu'))
         model.add(MaxPooling2D(pool_size = (2,2)))
         model.add(Dropout(0.2))
         model.add(Conv2D(filters = 32, kernel_size = (3,3), input_shape = (height, width, channels)))
-        model.add(BatchNormalization(axis = -1))
+        model.add(BatchNormalization())
         model.add(Activation('relu'))
         model.add(MaxPooling2D(pool_size = (2,2)))
         model.add(Dropout(0.2))
         model.add(Conv2D(filters = 64, kernel_size = (3,3), input_shape = (height, width, channels)))
-        model.add(BatchNormalization(axis = -1))
+        model.add(BatchNormalization())
         model.add(Activation('relu'))
         model.add(MaxPooling2D(pool_size = (2,2)))
 
@@ -43,7 +43,7 @@ class ConvNetwork:
         # softmax, que fará a classificação.
         model.add(Flatten())
         model.add(Dense(1024))
-        model.add(BatchNormalization(axis = -1))
+        model.add(BatchNormalization())
         model.add(Activation('relu'))
         model.add(Dropout(0.5))
         model.add(Dense(classes))
