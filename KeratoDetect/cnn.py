@@ -1,7 +1,5 @@
 # Importando as bibliotecas necessarias para processar as imagens e criar as
 # camadas da rede neural
-import cv2 as cv
-import numpy as np
 from keras.models import Sequential
 from keras.layers.core import Flatten
 from keras.layers.core import Dense
