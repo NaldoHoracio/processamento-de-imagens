@@ -47,10 +47,10 @@ read_fold_norm_s = np.asarray(read_fold_norm)
 # converter as imagens de 1D para o formato (28x28x1)
 if backend.image_data_format() == "channels_last":
     read_fold_norm_s = read_fold_norm_s.reshape(
-                                (read_fold_norm_s.shape[0], 180, 240, RGB))
+                                (read_fold_norm_s.shape[0], 180, 240, 3))
 else:
     read_fold_norm_s = read_fold_norm_s.reshape(
-                                (read_fold_norm_s.shape[0], RGB, 180, 240))
+                                (read_fold_norm_s.shape[0], 3, 180, 240))
 
 # SEPARAR EM DOIS GRUPOS: TREINO E TESTE
 
@@ -71,7 +71,7 @@ model.compile(optimizer=SGD(0.01), loss="binary_crossentropy",
  
 # treinar a CNN
 print("[INFO] treinando a CNN...")
-H = model.fit(trainX_kt, trainY_kt, batch_size=128, epochs=10, verbose=2,
+H = model.fit(trainX_kt, trainY_kt, batch_size=64, epochs=5, verbose=2,
           validation_data=(testX_kt, testY_kt))
 
 # avaliar a CNN
@@ -79,4 +79,17 @@ print("[INFO] avaliando a CNN...")
 predictions = model.predict(testX, batch_size=64)
 print(classification_report(testY.argmax(axis=1), predictions.argmax(axis=1),
                             target_names=[str(label) for label in range(2)]))
+
+# PLOTAR loss E accuracy PARA OS DATABASE 'train' E 'TEST'
+plt.style.use("ggplot")
+plt.figure()
+plt.plot(np.arange(0,5), H.history["loss"], label="train_loss")
+plt.plot(np.arange(0,5), H.history["val_loss"], label="val_loss")
+plt.plot(np.arange(0,5), H.history["acc"], label="train_acc")
+plt.plot(np.arange(0,5), H.history["val_acc"], label="val_acc")
+plt.title("Training Loss and Accuracy")
+plt.xlabel("Epoch #")
+plt.ylabel("Loss/Accuracy")
+plt.legend()
+plt.savefig('cnn.png', bbox_inches='tight')
         
