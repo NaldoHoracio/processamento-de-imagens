@@ -4,7 +4,7 @@ Created on Tue Dec  4 09:57:48 2018
 
 @author: alunoic
 """
-# Mulitplicando cada imagem por uma cte e somando-as
+# Mulitplicando cada imagem por uma cte. e somando-as
 
 import numpy as np
 import cv2
