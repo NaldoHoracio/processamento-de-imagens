@@ -5,10 +5,12 @@ Created on Tue Feb 19 08:57:27 2019
 @author: horacio
 """
 
+import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
-a = np.arange(15).reshape(3,5) # Create matrix 3x5 for start 1 to 15
-a.shape # Dimentions of array
-print("Dimenções da matriz:", a.ndim, "\n")
-print("Tipo de dado:", a.dtype.name, "\n")
-print("Tamanho do array:", a.itemsize, "\n")
+# Cria uma matriz 400x400 do tipo inteiro em cada elemento é 1
+img = np.ones((400,400), dtype=int)
+img = img*255 # Multiplica cada elemento da matriz por 255 (preto = 255)
+img = cv2.imshow('img', img)
+print(np.__version__)
